@@ -1,6 +1,8 @@
-# Teste de Notificações Web com React
+# Painel de Teste de Notificações Web
 
-Este projeto é um **painel de teste de notificações web** desenvolvido em React. Ele permite testar todas as propriedades suportadas por notificações disparadas diretamente de uma aba do navegador, sem necessidade de backend ou Service Worker.
+Este projeto permite testar Web Notifications diretamente no navegador, sem depender de backend. É ideal para explorar as funcionalidades das notificações, incluindo body, icon, badge, tag, requireInteraction, silent e data.
+
+O projeto está disponível em: [notifications.meltammy.com.br](https://notifications.meltammy.com.br/)
 
 ---
 
