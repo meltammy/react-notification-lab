@@ -70,3 +70,77 @@ O projeto está disponível em: [notifications.meltammy.com.br](https://notifica
 ---
 
 Feito com ❤️ por [Mel Tammy](https://meltammy.com.br/)
+
+# Como Funcionam as Web Notifications
+
+As **Web Notifications** permitem que aplicativos web enviem mensagens para o usuário, mesmo quando ele não está com a aba do site aberta. Elas são suportadas pela maioria dos navegadores modernos e podem ser usadas para alertas, lembretes ou interações rápidas.
+
+## 1. Permissão
+
+Antes de exibir notificações, o site precisa **solicitar permissão** ao usuário:
+
+- `Notification.permission` retorna o estado atual:
+
+  - `"granted"` → permitido
+  - `"denied"` → bloqueado
+  - `"default"` → ainda não decidido
+
+- Para solicitar permissão:
+
+`Notification.requestPermission().then((permission) => { console.log("Permissão:", permission); });`
+
+> Sem permissão `"granted"`, o navegador **não exibirá notificações**.
+
+## 2. Criando uma notificação
+
+Você pode criar uma notificação usando o construtor `Notification`:
+
+`new Notification("Título da Notificação", { body: "Texto secundário", icon: "/icon.png", badge: "/badge.png", tag: "alerta-1", requireInteraction: true, silent: false, data: { userId: 123 }, });`
+
+### Principais propriedades:
+
+| Propriedade          | Tipo                    | Descrição                                                                                         |
+| -------------------- | ----------------------- | ------------------------------------------------------------------------------------------------- |
+| `title`              | string                  | Título da notificação                                                                             |
+| `body`               | string                  | Texto secundário exibido na notificação                                                           |
+| `icon`               | string (URL)            | URL de um ícone pequeno da notificação                                                            |
+| `badge`              | string (URL)            | Ícone menor (badge), usado em dispositivos móveis                                                 |
+| `tag`                | string                  | Identificador da notificação; notificações com mesma tag podem substituir notificações anteriores |
+| `requireInteraction` | boolean                 | Se `true`, a notificação permanece visível até o usuário interagir                                |
+| `silent`             | boolean                 | Se `true`, a notificação não emite som                                                            |
+| `data`               | any (JSON serializável) | Armazena dados arbitrários acessíveis nos eventos (`onclick`, `onclose`)                          |
+
+## 3. Eventos importantes
+
+- **`onclick`**: disparado quando o usuário clica na notificação.
+- **`onclose`**: disparado quando a notificação é fechada (mais confiável via Service Worker).
+
+Exemplo:
+
+`const notification = new Notification("Oi!"); notification.onclick = () => console.log("Notificação clicada!"); notification.onclose = () => console.log("Notificação fechada!");`
+
+> ⚠️ Observação: sem Service Worker, clicar no “X” da notificação nem sempre dispara `onclose`.
+
+## 4. Limitações
+
+- **HTTPS obrigatório** (ou localhost) para que notificações funcionem.
+- **Sem Service Worker**, notificações podem não ser persistentes e o `onclose` nem sempre funciona.
+- Não há suporte a **ações (`actions`)** sem Service Worker.
+
+## 5. Service Worker
+
+Para notificações avançadas e confiáveis, especialmente quando a aba não está aberta:
+
+- Crie um **Service Worker** (`sw.js`).
+- Use a API `self.registration.showNotification(...)` dentro do SW.
+- Permite usar:
+  - Ações clicáveis (`actions`)
+  - `onclose` confiável
+  - Notificações persistentes
+
+## 6. Resumo
+
+1. Solicitar permissão do usuário.
+2. Criar a notificação com as propriedades desejadas.
+3. Adicionar eventos como `onclick` para interatividade.
+4. Para funcionalidades avançadas, usar **Service Worker**.
