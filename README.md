@@ -67,4 +67,4 @@ Este projeto é um **painel de teste de notificações web** desenvolvido em Rea
 
 ---
 
-Feito com ❤️ por [Seu Nome]
+Feito com ❤️ por [Mel Tammy](https://meltammy.com.br/)
