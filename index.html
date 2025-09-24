@@ -5,6 +5,18 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mel Tammy | Notification Lab</title>
+    <script
+      src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js"
+      defer
+    ></script>
+    <script>
+      window.OneSignalDeferred = window.OneSignalDeferred || [];
+      OneSignalDeferred.push(async function (OneSignal) {
+        await OneSignal.init({
+          appId: "2b7f6f3c-b2fe-4862-add5-d6a43dbe4b37",
+        });
+      });
+    </script>
   </head>
   <body>
     <div id="root"></div>
