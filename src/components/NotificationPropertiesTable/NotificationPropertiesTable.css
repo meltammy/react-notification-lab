@@ -1,0 +1,39 @@
+.table-container {
+  overflow-x: auto;
+  margin-top: 1rem;
+}
+
+.notification-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: sans-serif;
+  background: white;
+}
+
+.notification-table th {
+  background-color: #ffbd4a;
+  color: #fff;
+  padding: 0.75rem;
+  text-align: left;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.notification-table td {
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px solid #eee;
+}
+
+.notification-table tr.even {
+  background-color: #fff8e5;
+}
+
+.notification-table tr.odd {
+  background-color: #fffdf5;
+}
+
+.notification-table tr:hover {
+  background-color: #ffe88c;
+  transition: background-color 0.2s;
+}
